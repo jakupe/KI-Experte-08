@@ -159,7 +159,11 @@ Dieses Projekt ist unter der MIT-Lizenz lizenziert.
 
 ## 🎮 Live Demo
 
-[Spiele das Spiel auf Vercel](https://endzeit-survival-game.vercel.app)
+[Spiele das Spiel auf Vercel](https://ki-experte-08-7p77f8eu4-davids-projects-995f6adc.vercel.app)
+
+## 📂 GitHub Repository
+
+[**GitHub Repository**](https://github.com/jakupe/KI-Experte-08) - Fork das Projekt und trage bei!
 
 ---
 

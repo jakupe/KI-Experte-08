@@ -178,6 +178,22 @@ export default function Game() {
               <li>Rationen sind effektiver als normales Essen</li>
               <li>Funkgerät schaltet neue Kapitel frei!</li>
             </ul>
+
+            <h3>Projekt-Informationen:</h3>
+            <ul>
+              <li><strong>GitHub Repository:</strong> <a href="https://github.com/jakupe/KI-Experte-08" target="_blank" rel="noopener noreferrer">https://github.com/jakupe/KI-Experte-08</a></li>
+              <li><strong>Technologie:</strong> Next.js 14, React 18, jQuery, TypeScript</li>
+              <li><strong>Deployment:</strong> Vercel</li>
+              <li><strong>Entwickelt mit:</strong> Cursor AI</li>
+            </ul>
+
+            <h3>Entwicklung:</h3>
+            <ul>
+              <li>Fork das Repository auf GitHub</li>
+              <li>Erstelle einen Feature-Branch</li>
+              <li>Implementiere neue Features</li>
+              <li>Erstelle einen Pull Request</li>
+            </ul>
           </div>
           <button id="closeHelpBtn" className="action-button">Schließen</button>
         </div>
