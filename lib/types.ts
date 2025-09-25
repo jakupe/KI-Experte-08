@@ -112,3 +112,7 @@ export type ItemType =
 export type SceneType = 'house' | 'street' | 'supermarket' | 'bunker'
 
 export type SoundType = 'click' | 'collect' | 'craft' | 'use'
+
+// jQuery Types - Simplified for compatibility
+export type JQuery = any
+export type JQueryInstance = any

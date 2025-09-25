@@ -12,20 +12,24 @@ import {
   GameConfig,
   ItemType,
   SceneType,
-  SoundType
+  SoundType,
+  JQuery,
+  SceneObject,
+  HiddenObject,
+  Scene
 } from './types'
 
 export class EndzeitSurvivalGame {
-  private gameState: GameState
-  private inventory: Map<string, number>
-  private craftingRecipes: CraftingRecipe[]
-  private scenes: GameScenes
-  private sounds: SoundSystem
-  private elements: GameElements
-  private config: GameConfig
-  private $: any // jQuery
+  private gameState!: GameState
+  private inventory!: Map<string, number>
+  private craftingRecipes!: CraftingRecipe[]
+  private scenes!: GameScenes
+  private sounds!: SoundSystem
+  private elements!: GameElements
+  private config!: GameConfig
+  private $: JQuery
 
-  constructor(jQuery: any) {
+  constructor(jQuery: JQuery) {
     this.$ = jQuery
     this.config = {
       maxInventorySlots: 12,
@@ -214,8 +218,9 @@ export class EndzeitSurvivalGame {
    */
   private initializeEventListeners(): void {
     // Tastatur-Shortcuts
-    this.$(document).on('keydown', (e: KeyboardEvent) => {
-      switch(e.key.toLowerCase()) {
+    this.$(document).on('keydown', (e?: Event) => {
+      const event = e as KeyboardEvent
+      switch(event.key.toLowerCase()) {
         case 'i':
           this.toggleInventory()
           break
@@ -238,8 +243,10 @@ export class EndzeitSurvivalGame {
     })
 
     // Szene-Navigation
-    this.$('.nav-button').on('click', (e: Event) => {
-      const sceneId = this.$(e.target).data('scene')
+    this.$('.nav-button').on('click', (e?: Event) => {
+      const event = e as Event
+      const target = event.target as HTMLElement
+      const sceneId = this.$(target).data('scene') as unknown as string
       this.changeScene(sceneId)
     })
 
@@ -256,14 +263,16 @@ export class EndzeitSurvivalGame {
     this.$('#helpBtn').on('click', () => this.toggleHelp())
 
     // Modal-Hintergrund klicken zum Schließen
-    this.$('#gameModal').on('click', (e: Event) => {
-      if (e.target === this.elements.gameModal) {
+    this.$('#gameModal').on('click', (e?: Event) => {
+      const event = e as Event
+      if (event.target === this.elements.gameModal) {
         this.closeModals()
       }
     })
 
-    this.$('#helpModal').on('click', (e: Event) => {
-      if (e.target === this.elements.helpModal) {
+    this.$('#helpModal').on('click', (e?: Event) => {
+      const event = e as Event
+      if (event.target === this.elements.helpModal) {
         this.closeModals()
       }
     })
@@ -325,7 +334,7 @@ export class EndzeitSurvivalGame {
   /**
    * Mit Objekt interagieren
    */
-  private interactWithObject(obj: any): void {
+  private interactWithObject(obj: SceneObject): void {
     this.playSound('click')
     
     if (obj.type === 'container') {
@@ -349,7 +358,7 @@ export class EndzeitSurvivalGame {
   /**
    * Mit verstecktem Objekt interagieren
    */
-  private interactWithHiddenObject(obj: any): void {
+  private interactWithHiddenObject(obj: HiddenObject): void {
     this.playSound('click')
     
     this.addToInventory(obj.type, obj.amount || 1)
@@ -583,7 +592,7 @@ export class EndzeitSurvivalGame {
   /**
    * Neue Szene hinzufügen
    */
-  private addNewScene(sceneId: string, sceneData: any): void {
+  private addNewScene(sceneId: string, sceneData: Scene): void {
     this.scenes[sceneId] = sceneData
     
     // Navigation-Button hinzufügen

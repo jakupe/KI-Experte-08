@@ -1,9 +1,10 @@
 import { useEffect, useRef } from 'react'
 import { EndzeitSurvivalGame } from '../lib/game'
+import { JQuery } from '../lib/types'
 
 declare global {
   interface Window {
-    $: any
+    $: JQuery
     game: EndzeitSurvivalGame
   }
 }
