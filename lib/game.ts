@@ -35,7 +35,7 @@ export class EndzeitSurvivalGame {
       maxInventorySlots: 12,
       defaultHealth: 100,
       defaultHunger: 100,
-      hungerPerDay: 30,
+      hungerPerDay: 75, // 75% Hunger pro Nacht
       healthLossWhenHungry: 25,
       soundVolume: 0.3
     }
@@ -496,8 +496,14 @@ export class EndzeitSurvivalGame {
     // Hunger reduzieren
     this.gameState.hunger = Math.max(0, this.gameState.hunger - this.config.hungerPerDay)
     
-    // Gesundheit reduzieren wenn zu hungrig
+    // SOFORTIGES Game Over wenn verhungert (Hunger = 0)
     if (this.gameState.hunger <= 0) {
+      this.gameOverHunger()
+      return
+    }
+    
+    // Gesundheit reduzieren wenn zu hungrig (aber noch nicht verhungert)
+    if (this.gameState.hunger <= 20) {
       this.gameState.health = Math.max(0, this.gameState.health - this.config.healthLossWhenHungry)
     }
 
@@ -505,7 +511,7 @@ export class EndzeitSurvivalGame {
     if (this.gameState.hunger <= 20) {
       this.showMessage(`⚠️ KRITISCH: Du verhungerst! Finde Essen oder stirb! Hunger: ${this.gameState.hunger}/100`)
     } else {
-      this.showMessage(`Tag ${this.gameState.day} beginnt. Hunger: -${this.config.hungerPerDay}, Gesundheit: ${this.gameState.hunger <= 0 ? `-${this.config.healthLossWhenHungry}` : '0'}`)
+      this.showMessage(`Tag ${this.gameState.day} beginnt. Hunger: -${this.config.hungerPerDay}% (75% verbraucht!), Gesundheit: ${this.gameState.hunger <= 20 ? `-${this.config.healthLossWhenHungry}` : '0'}`)
     }
 
     // Sieg prüfen
@@ -514,7 +520,7 @@ export class EndzeitSurvivalGame {
       return
     }
 
-    // Game Over prüfen
+    // Game Over prüfen (Gesundheit)
     if (this.gameState.health <= 0) {
       this.gameOver()
       return
@@ -784,6 +790,16 @@ export class EndzeitSurvivalGame {
     this.gameState.gameOver = true
     this.$(this.elements.modalTitle).text('💀 Game Over')
     this.$(this.elements.modalMessage).text('Du hast es nicht geschafft. Deine Gesundheit ist auf 0 gesunken. Versuche es nochmal!')
+    this.$('#gameModal').removeClass('hidden')
+  }
+
+  /**
+   * Game Over-Screen für Verhungern anzeigen
+   */
+  private gameOverHunger(): void {
+    this.gameState.gameOver = true
+    this.$(this.elements.modalTitle).text('🍽️ Verhungert!')
+    this.$(this.elements.modalMessage).text('Du bist verhungert! Ohne Essen kannst du in der Endzeit nicht überleben. Sammle mehr Ressourcen und versuche es nochmal!')
     this.$('#gameModal').removeClass('hidden')
   }
 

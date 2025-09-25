@@ -170,7 +170,9 @@ export default function Game() {
 
             <h3>Tipps:</h3>
             <ul>
-              <li>Jede Nacht reduziert deinen Hunger - ohne Essen stirbst du!</li>
+              <li><strong>KRITISCH:</strong> Jede Nacht verbraucht 75% deines Hungers - ohne Essen stirbst du!</li>
+              <li><strong>Game Over:</strong> Wenn dein Hunger auf 0% fällt, verhungerst du sofort!</li>
+              <li>Du musst jeden Tag Essen finden oder craften, um zu überleben</li>
               <li>Klicke auf versteckte Objekte in den Szenen</li>
               <li>Verwende Lagerfeuer um Hunger zu reduzieren</li>
               <li>Verbande heilt deine Gesundheit</li>

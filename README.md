@@ -80,7 +80,9 @@ vercel --prod
 6. **Funkgerät**: Metall + Metall + Metall
 
 ### Tipps
-- Jede Nacht reduziert deinen Hunger - ohne Essen stirbst du!
+- **KRITISCH:** Jede Nacht verbraucht 75% deines Hungers - ohne Essen stirbst du!
+- **Game Over:** Wenn dein Hunger auf 0% fällt, verhungerst du sofort!
+- Du musst jeden Tag Essen finden oder craften, um zu überleben
 - Klicke auf versteckte Objekte in den Szenen
 - Rationen sind effektiver als normales Essen
 - Funkgerät schaltet neue Kapitel frei!
